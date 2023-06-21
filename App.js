@@ -8,7 +8,7 @@ export default function App() {
       <View style={styles.container}>
         <Text>Onofficiële Deltion rooster app</Text>
         <ScrollView>
-          <Rooster />
+          <Rooster key="r-1"/>
         </ScrollView>
         <StatusBar style="auto" />
       </View>
@@ -25,4 +25,7 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // justifyContent: 'center',
   },
+  title: {
+    textDecorationStyle: 'double'
+  }
 });
