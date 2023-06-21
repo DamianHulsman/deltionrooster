@@ -1,13 +1,13 @@
 {
   "expo": {
     "name": "DeltionRooster",
-    "slug": "DeltionRooster",
+    "slug": "deltionrooster",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "icon": "./assets/favicon-deltion.png",
+    "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/favicon-deltion.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,12 +19,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/favicon-deltion.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./assets/favicon-deltion.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "37995bdb-a87c-43c3-9a2f-f1b00e865e3d"
+      }
+    },
+    "owner": "dhulsman889"
   }
 }
