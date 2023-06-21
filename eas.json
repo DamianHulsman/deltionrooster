@@ -1,4 +1,8 @@
 {
+  "cli": {
+    "version": ">=1.0.0",
+    "requireCommit": true
+  },
   "build": {
     "development": {
       "developmentClient": true,
@@ -12,9 +16,6 @@
     "preview": {
       "distribution": "internal"
     },
-    "production": {},
-    "cli": {
-      "requireCommit": true
-    }
+    "production": {}
   }
 }
