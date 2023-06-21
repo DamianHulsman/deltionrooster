@@ -21,7 +21,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/favicon-deltion.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.dhulsman889.deltionrooster"
     },
     "web": {
       "favicon": "./assets/favicon-deltion.png"
