@@ -6,7 +6,7 @@ export default function App() {
   try {
     return (
       <View style={styles.container}>
-        <Text>Onofficiële Deltion rooster app</Text>
+        <Text style={styles.title}>Deltion Rooster SD2A</Text>
         <ScrollView>
           <Rooster key="r-1"/>
         </ScrollView>
@@ -22,10 +22,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    marginTop: 30,
   },
   title: {
-    textDecorationStyle: 'double'
+    marginLeft: 10,
+    fontWeight: 'bold'
   }
 });
