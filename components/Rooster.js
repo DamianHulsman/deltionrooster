@@ -30,7 +30,7 @@ const Rooster = () => {
             response.data.data.map(el => {
                 x++;
                 array.push(
-                    <View key= {"view-" + new Date().getMilliseconds()}>
+                    <View key= {"view-" + new Date().getMilliseconds()} style={styles.dayItem}>
                         <Text style={styles.title}>{el.date_f}</Text>
                         {
                             el.items.map(element => {
@@ -74,5 +74,12 @@ const styles = StyleSheet.create({
     title: {
         textAlign: 'center',
         fontWeight: 'bold'
+    },
+    dayItem: {
+        backgroundColor: '#ededed',
+        marginTop: 5,
+        marginBottom: 5,
+        marginLeft: 10,
+        marginRight: 10
     }
 });

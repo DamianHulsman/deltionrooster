@@ -22,10 +22,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    marginTop: 30,
+    marginTop: 40,
   },
   title: {
-    marginLeft: 10,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    backgroundColor: 'orange',
+    fontSize: 20,
+    textAlign: 'center',
   }
 });
