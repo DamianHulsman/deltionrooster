@@ -2,14 +2,14 @@
   "expo": {
     "name": "DeltionRooster",
     "slug": "deltionrooster",
-    "version": "1.0.0",
+    "version": "4.0.0",
     "orientation": "portrait",
     "icon": "./assets/deltionicon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/deltionicon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffa500"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -20,7 +20,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/deltionicon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#ffa500"
       },
       "package": "com.dhulsman889.deltionrooster"
     },
