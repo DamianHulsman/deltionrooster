@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, Button, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, Button, SafeAreaView, ScrollView } from 'react-native';
 import Rooster from './components/Rooster.js';
 
 export default function App() {
@@ -6,10 +6,8 @@ export default function App() {
     return (
       <SafeAreaView style={styles.container}>
         <Text style={styles.title}>Deltion Rooster SD2A</Text>
-        <ScrollView>
-          <Rooster key="r-1"/>
-        </ScrollView>
-        <Button title="info" color="orange" onPress={() => {alert(`Dit is de onofficiële rooster app voor Deltion \n\nVoor vragen stuur me een dm op Discord (dhulsman889)`)}}/>
+          <Rooster key="r-1" />
+        <Button title="info" color="orange" onPress={() => { alert(`Dit is de onofficiële rooster app voor Deltion \n\nVoor vragen stuur me een dm op Discord (dhulsman889)`) }} />
       </SafeAreaView>
     );
   } catch (err) {
