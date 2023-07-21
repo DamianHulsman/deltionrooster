@@ -28,7 +28,7 @@ const Rooster = () => {
 
         var endDate = new Date(currentDate.setDate(currentDate.getDate() + diff2));
         var formattedEndDate = endDate.getFullYear() + ('0' + (endDate.getMonth() + 1)).slice(-2) + ('0' + endDate.getDate()).slice(-2);
-        
+        console.log(`Startdate: ${formattedStartDate} Enddate: ${formattedEndDate}`);
         Data(formattedStartDate, formattedEndDate);
     }
         onSwipePerformed = (action) => {
@@ -43,6 +43,10 @@ const Rooster = () => {
               }
                case 'right':{
                 console.log('right Swipe performed');
+                diff = diff - 7;
+                diff2 = diff2 - 7;
+                console.log(`diff = ${diff} diff2 = ${diff2}`);
+                Dates();
                 break;
               }
                case 'up':{
