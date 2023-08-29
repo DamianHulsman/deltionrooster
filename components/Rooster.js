@@ -1,69 +1,72 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, SafeAreaView, StyleSheet, ScrollView } from "react-native";
 import SwipeGesture from '../swipe-gesture.js';
+import SelectDropdown from 'react-native-select-dropdown';
 import RoosterItem from "./RoosterItem";
 import axios from "axios";
 
 const Rooster = () => {
     try {
-
+        const classes = ['SD3A', 'SD3B'];
+        let klas = 'SD3A';
         const [schedule, setSchedule] = useState([]);
         var currentDate = new Date();
         var diff = currentDate.getDay() - 1;
         let diff2 = 15 - currentDate.getDay();
 
-        const Dates = () => {
-        //startdate
-        if (diff < 0) {
-            diff += 6;
+        const Dates = (klas) => {
+            //startdate
+            if (diff < 0) {
+                diff += 6;
+            }
+
+            var startDate = new Date(currentDate.setDate(currentDate.getDate() - diff));
+            var formattedStartDate = startDate.getFullYear() + ('0' + (startDate.getMonth() + 1)).slice(-2) + ('0' + startDate.getDate()).slice(-2);
+
+            //enddate
+            if (diff2 < 0) {
+                diff2 += 7;
+            }
+
+            var endDate = new Date(currentDate.setDate(currentDate.getDate() + diff2));
+            var formattedEndDate = endDate.getFullYear() + ('0' + (endDate.getMonth() + 1)).slice(-2) + ('0' + endDate.getDate()).slice(-2);
+            console.log(`Startdate: ${formattedStartDate} Enddate: ${formattedEndDate}`);
+            Data(formattedStartDate, formattedEndDate, klas);
         }
-
-        var startDate = new Date(currentDate.setDate(currentDate.getDate() - diff));
-        var formattedStartDate = startDate.getFullYear() + ('0' + (startDate.getMonth() + 1)).slice(-2) + ('0' + startDate.getDate()).slice(-2);
-
-        //enddate
-        if (diff2 < 0) {
-            diff2 += 7;
-        }
-
-        var endDate = new Date(currentDate.setDate(currentDate.getDate() + diff2));
-        var formattedEndDate = endDate.getFullYear() + ('0' + (endDate.getMonth() + 1)).slice(-2) + ('0' + endDate.getDate()).slice(-2);
-        console.log(`Startdate: ${formattedStartDate} Enddate: ${formattedEndDate}`);
-        Data(formattedStartDate, formattedEndDate);
-    }
         onSwipePerformed = (action) => {
-            switch(action){
-              case 'left':{
-                console.log('left Swipe performed');
-                diff = diff + 7;
-                diff2 = diff2 + 7;
-                console.log(`diff = ${diff} diff2 = ${diff2}`);
-                Dates();
-                break;
-              }
-               case 'right':{
-                console.log('right Swipe performed');
-                diff = diff - 7;
-                diff2 = diff2 - 7;
-                console.log(`diff = ${diff} diff2 = ${diff2}`);
-                Dates();
-                break;
-              }
-               case 'up':{
-                break;
-              }
-               case 'down':{
-                break;
-              }
-               default : {
-                console.log('Undeteceted action');
-               }
-            }}
-      
+            switch (action) {
+                case 'left': {
+                    console.log('left Swipe performed');
+                    diff = diff + 7;
+                    diff2 = diff2 + 7;
+                    console.log(`diff = ${diff} diff2 = ${diff2}`);
+                    Dates();
+                    break;
+                }
+                case 'right': {
+                    console.log('right Swipe performed');
+                    diff = diff - 7;
+                    diff2 = diff2 - 7;
+                    console.log(`diff = ${diff} diff2 = ${diff2}`);
+                    Dates();
+                    break;
+                }
+                case 'up': {
+                    break;
+                }
+                case 'down': {
+                    break;
+                }
+                default: {
+                    console.log('Undeteceted action');
+                }
+            }
+        }
 
-        const Data = async (formattedStartDate, formattedEndDate) => {
+
+        const Data = async (formattedStartDate, formattedEndDate, klas) => {
             let array = [];
-            let url = `https://roosters.deltion.nl/api/roster?group=SD2A&start=${formattedStartDate}&end=${formattedEndDate}`;
+            let url = `https://roosters.deltion.nl/api/roster?group=${klas}&start=${formattedStartDate}&end=${formattedEndDate}`;
             let response = await axios.request(url);
 
             response.data.data.map(el => {
@@ -88,15 +91,27 @@ const Rooster = () => {
         useEffect(() => {
             Data();
         }, []);
-
         return (
             <ScrollView>
-            <SafeAreaView key="sav-1">
-                <SwipeGesture gestureStyle={styles.swipesGestureContainer}
-                onSwipePerformed={this.onSwipePerformed}>
+                <SelectDropdown data={classes} defaultValueByIndex={0}
+                    onSelect={(selectedItem, index) => {
+                        console.log(selectedItem);
+                        klas = selectedItem;
+                        Dates(klas);
+                    }}
+                    buttonTextAfterSelection={(selectedItem, index) => {
+                        return selectedItem;
+                    }}
+                    rowTextForSelection={(item, index) => {
+                        return item;
+                    }}
+                />
+                <SafeAreaView key="sav-1">
+                    {/* <SwipeGesture gestureStyle={styles.swipesGestureContainer}
+                onSwipePerformed={this.onSwipePerformed}> */}
                     {schedule}
-                </SwipeGesture>
-            </SafeAreaView>
+                    {/* </SwipeGesture> */}
+                </SafeAreaView>
             </ScrollView>
         );
 
