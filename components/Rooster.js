@@ -29,7 +29,7 @@ const Rooster = () => {
 
         const Data = async () => {
             let array = [];
-            let url = `https://roosters.deltion.nl/api/roster?group=SD2A&start=${formattedStartDate}&end=${formattedEndDate}`;
+            let url = `https://roosters.deltion.nl/api/roster?group=SD3A&start=${formattedStartDate}&end=${formattedEndDate}`;
             const response = await axios.request(url);
             let x = 0;
 
