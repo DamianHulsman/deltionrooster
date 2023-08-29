@@ -5,7 +5,7 @@ export default function App() {
   try {
     return (
       <SafeAreaView style={styles.container}>
-        <Text style={styles.title}>Deltion Rooster SD2A</Text>
+        <Text style={styles.title}>Deltion Rooster SD3A</Text>
         <ScrollView>
           <Rooster key="r-1"/>
         </ScrollView>
