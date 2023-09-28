@@ -10,6 +10,8 @@
     "abuild": "eas build -p android --profile test"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.19.3",
+    "@react-native-community/netinfo": "^9.4.1",
     "axios": "^1.4.0",
     "eas": "^0.1.0",
     "expo": "~48.0.18",

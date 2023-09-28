@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, SafeAreaView, StyleSheet, Button } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import NetInfo from '@react-native-community/netinfo';
 import RoosterItem from "./RoosterItem";
 import axios from "axios";
 
@@ -14,7 +16,7 @@ const Rooster = () => {
         if (diff < 0) {
             diff = 6;
         }
-        
+
         var startDate = new Date(currentDate.setDate(currentDate.getDate() - diff));
         var formattedStartDate = startDate.getFullYear() + ('0' + (startDate.getMonth() + 1)).slice(-2) + ('0' + startDate.getDate()).slice(-2);
 
@@ -29,29 +31,51 @@ const Rooster = () => {
 
         const Data = async () => {
             let array = [];
-            let url = `https://roosters.deltion.nl/api/roster?group=SD3A&start=${formattedStartDate}&end=${formattedEndDate}`;
-            const response = await axios.request(url);
-            let x = 0;
 
-            response.data.data.map(el => {
-                x++;
-                array.push(
-                    <View key= {"view-" + new Date().getMilliseconds()} style={styles.dayItem}>
-                        <Text style={styles.title}>{el.date_f}</Text>
-                        {
-                            el.items.map(element => {
-                                return (
-                                    <View key={"vi-" + Math.random() * 999} style={styles.Rooster}>
-                                        <RoosterItem key={"ri-" + new Date().getMilliseconds()} data={element}></RoosterItem>
-                                   </View>
-                                   )
-                            })
-                        }
+            const setData = (response) => {
+                response.data.data.map(el => {
+                    array.push(
+                        <View key={"view-" + new Date().getMilliseconds()} style={styles.dayItem}>
+                            <Text style={styles.title}>{el.date_f}</Text>
+                            {
+                                el.items.map(element => {
+                                    return (
+                                        <View key={"vi-" + Math.random() * 999} style={styles.Rooster}>
+                                            <RoosterItem key={"ri-" + new Date().getMilliseconds()} data={element}></RoosterItem>
+                                        </View>
+                                    )
+                                })
+                            }
 
-                    </View>
-                )
+                        </View>
+                    )
+
+                });
+                setSchedule(array);
+            }
+
+            NetInfo.fetch().then((state) => {
+
+                if (state.isConnected) {
+
+                    let url = `https://roosters.deltion.nl/api/roster?group=SD3A&start=${formattedStartDate}&end=${formattedEndDate}`;
+
+                    const requestdata = async () => {
+                        const response = await axios.request(url);
+                        await AsyncStorage.setItem('Storagekey', JSON.stringify(response));
+                        setData(response);
+                    }
+                    requestdata();
+                } else {
+                    const requestdata = async () => {
+                        const cachedresponse = JSON.parse(await AsyncStorage.getItem('Storagekey'));
+                        setData(cachedresponse);
+                    }
+                    requestdata();
+                }
             });
-            setSchedule(array);
+
+                
         }
         useEffect(() => {
             Data();
