@@ -3,7 +3,7 @@
     "name": "DeltionRooster",
     "slug": "deltionrooster",
     "version": "4.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/deltionicon.png",
     "userInterfaceStyle": "light",
     "splash": {
